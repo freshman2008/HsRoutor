@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+if (IS_APP_MODULE.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 
 android {
     compileSdkVersion COMPILE_SDK_VER.toInteger()
@@ -6,7 +10,9 @@ android {
 
 
     defaultConfig {
-        applicationId "com.example.video"
+        if (IS_APP_MODULE.toBoolean()) {
+            applicationId "com.example.video"
+        }
         minSdkVersion MIN_SDK_VER.toInteger()
         targetSdkVersion TARGET_SDK_VER.toInteger()
         versionCode VER_CODE.toInteger()
@@ -23,6 +29,15 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            if (IS_APP_MODULE.toBoolean()) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+            }
+        }
+    }
 }
 
 dependencies {
