@@ -1,8 +1,4 @@
-if (IS_APP_MODULE.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion COMPILE_SDK_VER.toInteger()
@@ -10,9 +6,6 @@ android {
 
 
     defaultConfig {
-        if (IS_APP_MODULE.toBoolean()) {
-            applicationId "com.example.news"
-        }
         minSdkVersion MIN_SDK_VER.toInteger()
         targetSdkVersion TARGET_SDK_VER.toInteger()
         versionCode VER_CODE.toInteger()
@@ -29,25 +22,13 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            if (IS_APP_MODULE.toBoolean()) {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
-            }
-        }
-    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation "com.android.support:appcompat-v7:$APPCOMPAT_V7_VER"
-    implementation 'com.android.support.constraint:constraint-layout:2.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation project(':hsrouter')
-    implementation project(':annotation')
-    annotationProcessor project(':compiler')
 }

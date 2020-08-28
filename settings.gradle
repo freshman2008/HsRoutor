@@ -1,1 +1,1 @@
-include ':app', ':news', ':video'
+include ':app', ':news', ':video', ':hsrouter', ':annotation', ':compiler'

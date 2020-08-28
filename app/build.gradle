@@ -25,9 +25,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     if (!IS_APP_MODULE.toBoolean()) {
         implementation project(':news')
         implementation project(':video')
     }
+    implementation project(':hsrouter')
+    implementation project(':annotation')
+    annotationProcessor project(':compiler')
+//    implementation project(path: ':compiler')
 }
